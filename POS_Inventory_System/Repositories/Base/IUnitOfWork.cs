@@ -9,8 +9,8 @@ namespace POS_Inventory_System.Repositories.Base
 {
     public interface IUnitOfWork
     {
-        public ICompanyRepo CompanyRepo { get;  }
-        public ICompanyBranchRepo CompanyBranchRepo { get; }
+        public CompanyRepo CompanyRepo { get;  }
+        public CompanyBranchRepo CompanyBranchRepo { get; }
         string save();
     }
 }

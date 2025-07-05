@@ -10,14 +10,14 @@ namespace POS_Inventory_System.Repositories.Child
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ICompanyRepo companyRepo;
+        private CompanyRepo companyRepo;
         public InventoryContext _context;
         public UnitOfWork(InventoryContext context)
         {
             _context = context;
             
         }
-        public ICompanyRepo CompanyRepo
+        public CompanyRepo CompanyRepo
         {
             get
             {
@@ -30,8 +30,8 @@ namespace POS_Inventory_System.Repositories.Child
             }
         }
 
-        public ICompanyBranchRepo companyBranchRepo;
-        public ICompanyBranchRepo CompanyBranchRepo
+        public CompanyBranchRepo companyBranchRepo;
+        public CompanyBranchRepo CompanyBranchRepo
         {
             get
             {

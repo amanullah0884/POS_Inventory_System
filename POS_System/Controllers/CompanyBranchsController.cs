@@ -26,7 +26,7 @@ namespace POS_System.Controllers
             entity.CreatedDate = DateTime.Now.Date;
             entity.IsActive = true;
             await _unitOfWork.CompanyBranchRepo.Add(entity);
-            _unitOfWork.Save();
+            _unitOfWork.save();
             return Created("", entity);
 
         }

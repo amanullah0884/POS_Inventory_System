@@ -24,7 +24,7 @@ namespace POS_System.Controllers
         public async Task<IActionResult> Post(CompanyInfo entity)
         {
             await _unitOfWork.CompanyRepo.Add(entity);
-            _unitOfWork.Save();
+            _unitOfWork.save();
             return Created("", entity);
 
         }
