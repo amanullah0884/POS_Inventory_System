@@ -1,22 +1,27 @@
 using POS_Inventory_System.Repositories.Base;
 using POS_Inventory_System.Repositories.Child;
+using Microsoft.EntityFrameworkCore;
+using POS_Inventory_System.Models; // If using EF Core
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer(); // Swagger (standard)
+builder.Services.AddSwaggerGen(); // Swagger UI
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<InventoryContext>();
-builder.Services.AddControllers();
+
+builder.Services.AddDbContext<InventoryContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+  //  app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
