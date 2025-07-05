@@ -17,5 +17,10 @@ namespace POS_Inventory_System.Repositories.Child
         public CompanyBranchRepo(InventoryContext context) : base(context)
         {
         }
+
+        public async Task Add(Country country)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using POS_Inventory_System.Models;
 using POS_Inventory_System.Repositories.Base;
