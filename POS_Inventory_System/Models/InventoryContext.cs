@@ -20,6 +20,7 @@ namespace POS_Inventory_System.Models
         public DbSet<CompanyInfo> CompanyInfo { get; set; }
         public DbSet<CompanyBranch> CompanyBranch { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<Brand> Brand { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=dbInventory; TrustServerCertificate=true;Trusted_connection=true; ");

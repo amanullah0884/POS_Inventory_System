@@ -24,7 +24,7 @@ namespace POS_System.Controllers
             country.CreatedBy = User.Identity?.Name ?? "Not authenticated";
             country.CreatedDate= DateTime.Now;
             country.IsActive = true;
-            await _unitOfWork.CompanyBranchRepo.Add(country);
+            await _unitOfWork.CountryRepo.Add(country);
             _unitOfWork.save();
             return Created("", country);
         }
