@@ -13,6 +13,7 @@ namespace POS_Inventory_System.Repositories.Base
         public CompanyBranchRepo CompanyBranchRepo { get; }
         public CountryRepo CountryRepo { get; }
         public BrandRepo BrandRepo { get; }
+        public ItemRepo ItemRepo { get; }
         string save();
     }
 }

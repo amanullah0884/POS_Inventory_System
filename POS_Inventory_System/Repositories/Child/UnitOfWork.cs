@@ -33,6 +33,7 @@ namespace POS_Inventory_System.Repositories.Child
         public CompanyBranchRepo companyBranchRepo;
         private CountryRepo countryRepo;
         private BrandRepo brandRepo;
+        private ItemRepo itemRepo;
 
         public CompanyBranchRepo CompanyBranchRepo
         {
@@ -64,7 +65,18 @@ namespace POS_Inventory_System.Repositories.Child
                 {
                     brandRepo = new BrandRepo(_context);
                 }
-                return BrandRepo;
+                return brandRepo;
+            }
+        }
+        public ItemRepo ItemRepo
+        {
+            get
+            {
+                if(ItemRepo== null)
+                {
+                    itemRepo = new ItemRepo(_context);
+                }
+                return itemRepo;
             }
         }
 
