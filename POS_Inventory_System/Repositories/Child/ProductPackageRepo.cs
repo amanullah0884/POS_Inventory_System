@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace POS_Inventory_System.Repositories.Child
 {
-    public interface ICompanyBranchRepo : IGenericRepo<CompanyBranch>
+    public interface IProductPackageRepo :IGenericRepo<ProductPackage>
     {
 
     }
-    public class CompanyBranchRepo : GenericRepo<CompanyBranch>, ICompanyBranchRepo
+    public class ProductPackageRepo : GenericRepo<ProductPackage>, IProductPackageRepo
     {
-        public CompanyBranchRepo(InventoryContext context) : base(context)
+        public ProductPackageRepo(InventoryContext context) : base(context)
         {
         }
-
-        
     }
 }

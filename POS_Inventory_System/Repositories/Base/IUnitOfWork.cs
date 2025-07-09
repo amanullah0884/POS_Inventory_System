@@ -1,19 +1,29 @@
-﻿using POS_Inventory_System.Repositories.Child;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using POS_Inventory_System.Models;
+using POS_Inventory_System.Repositories.Child;
 
 namespace POS_Inventory_System.Repositories.Base
 {
     public interface IUnitOfWork
     {
-        public CompanyRepo CompanyRepo { get;  }
-        public CompanyBranchRepo CompanyBranchRepo { get; }
-        public CountryRepo CountryRepo { get; }
-        public BrandRepo BrandRepo { get; }
-        public ItemRepo ItemRepo { get; }
+        CompanyRepo CompanyRepo { get; }
+        CompanyBranchRepo CompanyBranchRepo { get; }
+        CountryRepo CountryRepo { get; }
+        BrandRepo BrandRepo { get; }
+        ItemRepo ItemRepo { get; }
+        ModelRepo ModelRepo { get; }
+        ColorRepo ColorRepo { get; }
+        PaymentMethodRepo PaymentMethodRepo { get; }
+        ProductPackageRepo ProductPackageRepo { get; }
+        PurchaseMastersRepo PurchaseMastersRepo { get; }
+        SalesMasterRepo SalesMasterRepo { get; }
+        SizeRepo SizeRepo { get; }
+        UnitRepo UnitRepo { get; }
+        SupplierAddressRepo SupplierAddressRepo { get; }
+        VoucherTypeRepo VoucherTypeRepo { get; }
+        VoucherTypewithComRepo VoucherTypewithComRepo { get; }
+        CustomerRepo CustomerRepo { get; }
+        StockMasterRepo StockMasterRepo { get; }
+
         string save();
     }
 }

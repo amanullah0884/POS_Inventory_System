@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace POS_Inventory_System.Repositories.Child
 {
-    public interface ICompanyBranchRepo : IGenericRepo<CompanyBranch>
+    public interface IVoucherTypeComRepo : IGenericRepo < VoucherTypewithCom>
     {
 
     }
-    public class CompanyBranchRepo : GenericRepo<CompanyBranch>, ICompanyBranchRepo
+    public class VoucherTypewithComRepo : GenericRepo<VoucherTypewithCom>, IVoucherTypeComRepo
+
     {
-        public CompanyBranchRepo(InventoryContext context) : base(context)
+        public VoucherTypewithComRepo(InventoryContext context) : base(context)
         {
         }
-
-        
     }
 }
