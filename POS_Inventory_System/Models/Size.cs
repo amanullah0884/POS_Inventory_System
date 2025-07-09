@@ -10,6 +10,7 @@ namespace POS_Inventory_System.Models
 {
     public class Size : BaseCLass
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -23,13 +24,13 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Size")]
         public int SizeId { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchId { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
 
         public virtual CompanyBranch? CompanyBranch { get; set; }
 

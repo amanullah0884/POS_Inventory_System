@@ -19,7 +19,7 @@ namespace POS_System.Controllers
             _unitOfWork = unitofwork;
         }
 
-        // GET: api/Items
+   
         [HttpGet]
         public async Task<List<Item>> Get()
         {
@@ -27,7 +27,7 @@ namespace POS_System.Controllers
             return data.ToList();
         }
 
-        // POST: api/Items
+       
         [HttpPost]
         public async Task<IActionResult> Post(Item entity)
         {
@@ -39,7 +39,7 @@ namespace POS_System.Controllers
             return Created("", entity);
         }
 
-        // PUT: api/Items/5
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Item entity)
         {
@@ -61,7 +61,7 @@ namespace POS_System.Controllers
             return Ok(existing);
         }
 
-        // DELETE: api/Items/5
+     
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -62,13 +62,13 @@ namespace POS_Inventory_System.Models
         [ForeignKey("VoucherType")]
         public int VoucherTypeID { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
 
         public virtual CompanyBranch? Branch { get; set; }
 
@@ -111,13 +111,13 @@ namespace POS_Inventory_System.Models
         [ForeignKey("PurchaseMasters")]
         public int PurchasemasterID { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
 
         public virtual CompanyBranch? Branch { get; set; }
 

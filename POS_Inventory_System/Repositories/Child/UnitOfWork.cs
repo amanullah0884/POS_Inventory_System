@@ -15,7 +15,6 @@ namespace POS_Inventory_System.Repositories.Child
 
         private CompanyRepo companyRepo;
         private CompanyBranchRepo companyBranchRepo;
-        private CountryRepo countryRepo;
         private BrandRepo brandRepo;
         private ItemRepo itemRepo;
         private ModelRepo modelRepo;
@@ -31,6 +30,8 @@ namespace POS_Inventory_System.Repositories.Child
         private VoucherTypewithComRepo voucherTypewithComRepo;
         private CustomerRepo customerRepo;
         private StockMasterRepo stockMasterRepo;
+        private CategoryRepo categoryRepo;
+        private CountryRepo countryRepo;
 
         public CompanyRepo CompanyRepo
         {
@@ -55,18 +56,18 @@ namespace POS_Inventory_System.Repositories.Child
                 return companyBranchRepo;
             }
         }
-
-        public CountryRepo CountryRepo
+        public CategoryRepo CategoryRepo
         {
             get
             {
-                if (countryRepo == null)
+                if (CategoryRepo == null)
                 {
-                    countryRepo = new CountryRepo(_context);
+                    categoryRepo = new CategoryRepo(_context);
                 }
-                return countryRepo;
+                return categoryRepo;
             }
         }
+
         public StockMasterRepo StockMasterRepo
         {
             get
@@ -126,6 +127,17 @@ namespace POS_Inventory_System.Repositories.Child
                 }
                 return colorRepo;
             }
+        }
+        public CountryRepo CountryRepo
+        {
+            get
+            {
+                if (CountryRepo == null)
+                {
+                    countryRepo = new CountryRepo(_context);
+                }
+                return countryRepo;
+        }
         }
         public CustomerRepo CustomerRepo
         {
@@ -258,6 +270,11 @@ namespace POS_Inventory_System.Repositories.Child
                 return "failed";
             }
         }
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
+        }
+
     }
 }
 

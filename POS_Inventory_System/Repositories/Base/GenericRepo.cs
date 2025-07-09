@@ -18,7 +18,7 @@ namespace POS_Inventory_System.Repositories.Base
         public GenericRepo(InventoryContext context)
         {
             _context = context;
-            _dbset = _context.Set<T>();
+        //    _dbset = _context.Set<T>();
 
         }
         public async Task Add(T entity)

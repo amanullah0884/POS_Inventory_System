@@ -10,6 +10,8 @@ namespace POS_Inventory_System.Models
 {
     public class Item : BaseCLass
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         [MaxLength(5)]
         public string Code { get; set; } = string.Empty; // Barcode
@@ -88,14 +90,14 @@ namespace POS_Inventory_System.Models
         [NotMapped]
         public string? ItemCode { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchId { get; set; }
 
         public virtual Item? Item { get; set; }
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
         public virtual CompanyBranch? CompanyBranch { get; set; }
     }
 
@@ -104,13 +106,13 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Item")]
         public int ItemId { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchId { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
         public virtual CompanyBranch? CompanyBranch { get; set; }
         public virtual Item? Item { get; set; }
     }

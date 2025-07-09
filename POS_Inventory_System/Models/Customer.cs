@@ -49,7 +49,8 @@ namespace POS_Inventory_System.Models
         public string? Website { get; set; }
 
         [Required]
-        public bool IsActive { get; set; }
+        public new bool IsActive { get; set; }
+
 
         public bool IsArchive { get; set; }
 

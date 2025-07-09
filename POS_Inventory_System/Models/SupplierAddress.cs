@@ -44,7 +44,7 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Company")]
         public int ComId { get; set; }
 
-        public virtual CompanyINfo? Company { get; set; }
+        public virtual CompanyInfo? Company { get; set; }
 
         [ForeignKey("Branch")]
         public int BranchId { get; set; }
@@ -67,7 +67,8 @@ namespace POS_Inventory_System.Models
 
         public string? Website { get; set; }
 
-        public bool IsActive { get; set; }
+        public new bool IsActive { get; set; }
+
 
         public bool IsArchive { get; set; }
 

@@ -24,13 +24,13 @@ namespace POS_Inventory_System.Models
         [ForeignKey("VoucherType")]
         public int VoucherTypeId { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("Branch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo CompanyINfo { get; set; } = null!;
+        public virtual CompanyInfo CompanyInfo { get; set; } = null!;
 
         public virtual CompanyBranch Branch { get; set; } = null!;
 

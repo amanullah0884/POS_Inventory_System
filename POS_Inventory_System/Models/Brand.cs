@@ -11,6 +11,8 @@ namespace POS_Inventory_System.Models
 
     public class Brand : BaseCLass
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
 
@@ -33,7 +35,7 @@ namespace POS_Inventory_System.Models
         public virtual CompanyBranch? CompanyBranch { get; set; }
     }
 
-    //public class CompanyINfo : BaseCLass
+    //public class CompanyInfo : BaseCLass
     //{
     //    public int Id { get; set; }
 
@@ -55,7 +57,7 @@ namespace POS_Inventory_System.Models
     //    public int CompanyINfoId { get; set; }
 
     //    [ForeignKey("CompanyINfoId")]
-    //    public virtual CompanyINfo CompanyINfo { get; set; }
+    //    public virtual CompanyInfo CompanyInfo { get; set; }
 
 
 }

@@ -10,6 +10,8 @@ namespace POS_Inventory_System.Models
 {
     public class ProductPackage : BaseCLass
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
 
@@ -39,7 +41,7 @@ namespace POS_Inventory_System.Models
 
     public class Subscription : BaseCLass
     {
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
         [ForeignKey("CompanyBranch")]
@@ -60,7 +62,7 @@ namespace POS_Inventory_System.Models
 
         public DateOnly? SubscriptionEndDate { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
         public virtual CompanyBranch? CompanyBranch { get; set; }
         public virtual ProductPackage? ProductPackage { get; set; }
         public virtual ProductPackagePrice? ProductPackagePrice { get; set; }
@@ -68,7 +70,7 @@ namespace POS_Inventory_System.Models
 
     public class SubscriptionRenew : BaseCLass
     {
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
         [ForeignKey("CompanyBranch")]
@@ -85,7 +87,7 @@ namespace POS_Inventory_System.Models
 
         public DateOnly? SubscriptionEndDate { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
         public virtual CompanyBranch? CompanyBranch { get; set; }
         public virtual ProductPackage? ProductPackage { get; set; }
         public virtual ProductPackagePrice? ProductPackagePrice { get; set; }

@@ -61,13 +61,13 @@ namespace POS_Inventory_System.Models
     //    [ForeignKey("Category")]
     //    public int CatId { get; set; }
 
-    //    [ForeignKey("CompanyINfo")]
+    //    [ForeignKey("CompanyInfo")]
     //    public int ComId { get; set; }
 
     //    [ForeignKey("CompanyBranch")]
     //    public int ComBranchId { get; set; }
 
-    //    public virtual CompanyINfo? CompanyINfo { get; set; }
+    //    public virtual CompanyInfo? CompanyInfo { get; set; }
     //    public virtual Category? Category { get; set; }
     //    public virtual CompanyBranch? CompanyBranch { get; set; }
     //}
@@ -181,18 +181,18 @@ namespace POS_Inventory_System.Models
     //    [ForeignKey("Brand")]
     //    public int BrandId { get; set; }
 
-    //    [ForeignKey("CompanyINfo")]
+    //    [ForeignKey("CompanyInfo")]
     //    public int ComId { get; set; }
 
     //    [ForeignKey("CompanyBranch")]
     //    public int BranchId { get; set; }
 
     //    public virtual Brand? Brand { get; set; }
-    //    public virtual CompanyINfo? CompanyINfo { get; set; }
+    //    public virtual CompanyInfo? CompanyInfo { get; set; }
     //    public virtual CompanyBranch? CompanyBranch { get; set; }
     //}
 
-    //public class CompanyINfo : BaseCLass
+    //public class CompanyInfo : BaseCLass
     //{
     //    public int Id { get; set; }
     //    public string Name { get; set; } = string.Empty;
@@ -208,6 +208,6 @@ namespace POS_Inventory_System.Models
     //    public int CompanyINfoId { get; set; }
 
     //    [ForeignKey("CompanyINfoId")]
-    //    public virtual CompanyINfo? CompanyINfo { get; set; }
+    //    public virtual CompanyInfo? CompanyInfo { get; set; }
     //}
 }

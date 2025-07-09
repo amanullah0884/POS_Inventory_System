@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS_Inventory_System.Models;
 
@@ -11,13 +12,15 @@ using POS_Inventory_System.Models;
 namespace POS_Inventory_System.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class InventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20250709145859_upg")]
+    partial class upg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.6")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -577,11 +580,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.Item", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<decimal>("AveragePurchasePrice")
                         .HasColumnType("decimal(18,2)");
@@ -613,9 +616,6 @@ namespace POS_Inventory_System.Migrations
 
                     b.Property<decimal>("DiscountRate")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("IdealPrice")
                         .HasColumnType("decimal(18,2)");
@@ -682,7 +682,7 @@ namespace POS_Inventory_System.Migrations
                     b.Property<decimal>("WholeSalePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.HasIndex("BrandId");
 

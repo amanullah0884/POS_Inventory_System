@@ -17,7 +17,7 @@ namespace POS_Inventory_System.Models
         {
 
         }
-        public DbSet<CompanyInfo> CompanyInfo { get; set; }
+        public DbSet<CompanyInfo> CompanyInfos { get; set; }
         public DbSet<CompanyBranch> CompanyBranch { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Brand> Brand { get; set; }
@@ -25,7 +25,7 @@ namespace POS_Inventory_System.Models
         public DbSet<Category> Category { get; set; }
         public DbSet<Color> Color { get; set; }
         public DbSet<Customer> Customer { get; set; }
-        public DbSet<Model> Model {  get; set; }
+        public DbSet<Model> myModel {  get; set; }
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<ProductPackage> ProductPackage { get; set; }
         public DbSet<PurchaseMasters> PurchaseMasters { get; set; }

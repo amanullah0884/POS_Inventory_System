@@ -11,65 +11,62 @@ namespace POS_System.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public BrandsController(IUnitOfWork unitofwork)
+        public BrandsController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitofwork;
+            _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Brands
+        
         [HttpGet]
-        public async Task<List<Brand>> Get()
+        public async Task<ActionResult<List<Brand>>> Get()
         {
             var data = await _unitOfWork.BrandRepo.GetAll(null, null);
-            return data.ToList();
+            return Ok(data.ToList());
         }
 
-        // POST: api/Brands
+        
         [HttpPost]
         public async Task<IActionResult> Post(Brand entity)
         {
-            entity.CreatedBy = User.Identity?.Name ?? "Not authenticated";
-            entity.CreatedDate = DateTime.Now.Date;
+            entity.CreatedBy = User.Identity?.Name ?? "Anonymous";
+            entity.CreatedDate = DateTime.Now;
             entity.IsActive = true;
+
             await _unitOfWork.BrandRepo.Add(entity);
-            _unitOfWork.save();
-            return Created("", entity);
+            await _unitOfWork.Save();
+
+            return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
         }
 
-        // PUT: api/Brands/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Brand entity)
         {
             var existing = await _unitOfWork.BrandRepo.GetById(id);
             if (existing == null)
-            {
                 return NotFound();
-            }
 
             existing.Name = entity.Name;
             existing.Description = entity.Description;
             existing.IsActive = entity.IsActive;
-            existing.ModifiedBy = User.Identity?.Name ?? "Not authenticated";
+            existing.ModifiedBy = User.Identity?.Name ?? "Anonymous";
             existing.ModifiedDate = DateTime.Now;
 
             _unitOfWork.BrandRepo.Update(existing);
-            _unitOfWork.save();
+            await _unitOfWork.Save();
 
             return Ok(existing);
         }
 
-        // DELETE: api/Brands/5
+   
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var entity = await _unitOfWork.BrandRepo.GetById(id);
             if (entity == null)
-            {
                 return NotFound();
-            }
 
             _unitOfWork.BrandRepo.Delete(entity);
-            _unitOfWork.save();
+            await _unitOfWork.Save();
 
             return NoContent();
         }

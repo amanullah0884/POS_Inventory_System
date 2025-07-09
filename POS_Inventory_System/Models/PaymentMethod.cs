@@ -37,13 +37,13 @@ namespace POS_Inventory_System.Models
         [Required]
         public string AccountNumber { get; set; } = string.Empty; // Mobile/Bank account number
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("Branch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
         public virtual CompanyBranch? Branch { get; set; }
         public virtual PaymentMethod? PaymentMethod { get; set; }
     }

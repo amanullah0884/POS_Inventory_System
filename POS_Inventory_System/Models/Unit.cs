@@ -10,6 +10,7 @@ namespace POS_Inventory_System.Models
 {
     public partial class Unit : BaseCLass
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -27,13 +28,13 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Unit")]
         public int UnitId { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchId { get; set; }
 
-        public virtual CompanyINfo CompanyINfo { get; set; } = null!;
+        public virtual CompanyInfo CompanyInfo { get; set; } = null!;
 
         public virtual CompanyBranch CompanyBranch { get; set; } = null!;
 

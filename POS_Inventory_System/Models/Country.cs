@@ -22,7 +22,7 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Currency")]
         public int CurrencyID { get; set; }
 
-        public bool IsActive { get; set; }
+        public new bool IsActive { get; set; }
 
         public virtual Currency? Currency { get; set; }
     }
@@ -54,7 +54,7 @@ namespace POS_Inventory_System.Models
         [Required]
         public string Code { get; set; } = string.Empty;
 
-        public bool IsActive { get; set; }
+        public new bool IsActive { get; set; }
 
         [ForeignKey("Country")]
         public int CountryID { get; set; }

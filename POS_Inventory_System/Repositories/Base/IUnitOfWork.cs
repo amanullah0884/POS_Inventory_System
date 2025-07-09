@@ -8,6 +8,7 @@ namespace POS_Inventory_System.Repositories.Base
         CompanyRepo CompanyRepo { get; }
         CompanyBranchRepo CompanyBranchRepo { get; }
         CountryRepo CountryRepo { get; }
+        CategoryRepo CategoryRepo { get; }
         BrandRepo BrandRepo { get; }
         ItemRepo ItemRepo { get; }
         ModelRepo ModelRepo { get; }
@@ -25,5 +26,6 @@ namespace POS_Inventory_System.Repositories.Base
         StockMasterRepo StockMasterRepo { get; }
 
         string save();
+        Task Save();
     }
 }

@@ -11,7 +11,7 @@ namespace POS_Inventory_System.Models
     public class StockMaster : BaseCLass
     {
         [ForeignKey("Item")]
-        public string ItemId { get; set; } = string.Empty; // assuming string id
+        public int ItemId { get; set; } // assuming string id
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
@@ -28,13 +28,13 @@ namespace POS_Inventory_System.Models
 
         public double SellingPrice { get; set; } // Retail Price
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("Branch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
 
         public virtual CompanyBranch? Branch { get; set; }
 
@@ -64,13 +64,13 @@ namespace POS_Inventory_System.Models
 
         public string? Remarks { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("Branch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
 
         public virtual CompanyBranch? Branch { get; set; }
 

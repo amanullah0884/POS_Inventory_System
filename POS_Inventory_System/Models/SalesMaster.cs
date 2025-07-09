@@ -48,19 +48,19 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Customer")]
         public int CustomerID { get; set; }
 
-        [ForeignKey("PaymentMethod")]
-        public int PaymodeID { get; set; }
+        //[ForeignKey("PaymentMethod")]
+        //public int PaymodeID { get; set; }
 
         [ForeignKey("VoucherType")]
         public int VoucherTypeID { get; set; }
 
-        [ForeignKey("CompanyINfo")]
+        [ForeignKey("CompanyInfo")]
         public int CompanyId { get; set; }
 
         [ForeignKey("CompanyBranch")]
         public int BranchID { get; set; }
 
-        public virtual CompanyINfo? CompanyINfo { get; set; }
+        public virtual CompanyInfo? CompanyInfo { get; set; }
 
         public virtual CompanyBranch? Branch { get; set; }
 
