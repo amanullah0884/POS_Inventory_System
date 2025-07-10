@@ -10,8 +10,8 @@ namespace POS_Inventory_System.Models
 {
     public partial class Unit : BaseCLass
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
 
         [Required]
         public string ActualName { get; set; } = string.Empty;

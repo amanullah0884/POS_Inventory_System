@@ -38,7 +38,7 @@ namespace POS_Inventory_System.Models
         public DbSet<VoucherTypewithCom> voucherTypewithCom{ get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=dbInventory; TrustServerCertificate=true;Trusted_connection=true; ");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-QTAM551\\SQLEXPRESS;Initial Catalog=dbInventory; TrustServerCertificate=true;Trusted_connection=true; ");
         }
     }
 }

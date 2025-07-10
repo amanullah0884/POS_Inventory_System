@@ -10,8 +10,8 @@ namespace POS_Inventory_System.Models
 {
     public class Item : BaseCLass
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         [Required]
         [MaxLength(5)]
         public string Code { get; set; } = string.Empty; // Barcode
@@ -40,8 +40,8 @@ namespace POS_Inventory_System.Models
         [ForeignKey("Brand")]
         public int BrandId { get; set; }
 
-        [ForeignKey("Model")]
-        public int ModelId { get; set; }
+        //[ForeignKey("Model")]
+        //public int ModelId { get; set; }
 
         [ForeignKey("Unit")]
         public int? UnitId { get; set; }

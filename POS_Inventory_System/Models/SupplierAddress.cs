@@ -10,6 +10,7 @@ namespace POS_Inventory_System.Models
 {
     public class SupplierAddress
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -41,10 +42,10 @@ namespace POS_Inventory_System.Models
         [Required]
         public string SupplierName { get; set; } = string.Empty;
 
-        [ForeignKey("Company")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
-        public virtual CompanyInfo? Company { get; set; }
+        public virtual CompanyInfo? Company{ get; set; }
 
         [ForeignKey("Branch")]
         public int BranchId { get; set; }

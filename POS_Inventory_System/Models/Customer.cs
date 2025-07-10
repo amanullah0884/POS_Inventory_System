@@ -10,16 +10,15 @@ namespace POS_Inventory_System.Models
 {
     public class Customer : BaseCLass
     {
-        [Required]
-        public string Code { get; set; } = string.Empty;
+       
 
         [Required]
         public string Name { get; set; } = string.Empty;
 
-        [ForeignKey("Company")]
+        [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }
 
-        public virtual CompanyInfo? Company { get; set; }
+        public virtual CompanyInfo? ComCompanyInfo { get; set; }
 
         [ForeignKey("Branch")]
         public int BranchId { get; set; }

@@ -10,8 +10,8 @@ namespace POS_Inventory_System.Models
 {
     public class Model : BaseCLass
     {
-        [Key]
-        public int Id { get; set; }
+    //    [Key]
+    //    public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
 
@@ -22,8 +22,8 @@ namespace POS_Inventory_System.Models
 
     public class ModelWithCom : BaseCLass
     {
-        [ForeignKey("Model")]
-        public int ModelId { get; set; }
+        //[ForeignKey("Model")]
+        //public int ModelId { get; set; }
 
         [ForeignKey("CompanyInfo")]
         public int ComId { get; set; }

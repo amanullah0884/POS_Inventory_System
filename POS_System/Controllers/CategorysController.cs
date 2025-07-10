@@ -48,7 +48,7 @@ namespace POS_System.Controllers
             await _unitOfWork.CategoryRepo.Add(category);
             await _unitOfWork.Save();
 
-            return CreatedAtAction(nameof(GetById), new { id = category.Id }, category);
+            return CreatedAtAction(nameof(GetById), new { id = category.ID }, category);
         }
 
        

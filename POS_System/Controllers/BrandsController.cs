@@ -35,7 +35,7 @@ namespace POS_System.Controllers
             await _unitOfWork.BrandRepo.Add(entity);
             await _unitOfWork.Save();
 
-            return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
+            return CreatedAtAction(nameof(Get), new { id = entity.ID }, entity);
         }
 
         [HttpPut("{id}")]

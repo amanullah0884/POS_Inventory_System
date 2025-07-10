@@ -6,41 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace POS_Inventory_System.Migrations
 {
     /// <inheritdoc />
-    public partial class upg : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_CompanyInfo",
-                table: "CompanyInfo");
-
-            migrationBuilder.RenameTable(
-                name: "CompanyInfo",
-                newName: "CompanyInfos");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "ID",
-                table: "CompanyInfos",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
-                .OldAnnotation("SqlServer:Identity", "1, 1");
-
-            migrationBuilder.AddColumn<int>(
-                name: "CompanyID",
-                table: "CompanyInfos",
-                type: "int",
-                nullable: false,
-                defaultValue: 0)
-                .Annotation("SqlServer:Identity", "1, 1");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_CompanyInfos",
-                table: "CompanyInfos",
-                column: "CompanyID");
-
             migrationBuilder.CreateTable(
                 name: "Brand",
                 columns: table => new
@@ -66,13 +36,12 @@ namespace POS_Inventory_System.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ParentId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ID = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -83,18 +52,17 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Category", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Color",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ID = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -105,11 +73,11 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Color", x => x.Id);
+                    table.PrimaryKey("PK_Color", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompanyBranch",
+                name: "CompanyInfos",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -118,6 +86,8 @@ namespace POS_Inventory_System.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TIN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VatRegistryNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FiscalYearStartDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsSystemOwner = table.Column<bool>(type: "bit", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPersonDesignation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -125,7 +95,7 @@ namespace POS_Inventory_System.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    ComId = table.Column<int>(type: "int", nullable: false),
+                    IsHeadOffice = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -135,13 +105,7 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompanyBranch", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_CompanyBranch_CompanyInfos_ComId",
-                        column: x => x.ComId,
-                        principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_CompanyInfos", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,11 +169,10 @@ namespace POS_Inventory_System.Migrations
                 name: "Size",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ID = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -220,20 +183,19 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Size", x => x.Id);
+                    table.PrimaryKey("PK_Size", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "unit",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ActualName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BaseUnitId = table.Column<int>(type: "int", nullable: true),
                     BaseUnitMultiplier = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ID = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -244,7 +206,7 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_unit", x => x.Id);
+                    table.PrimaryKey("PK_unit", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,12 +235,11 @@ namespace POS_Inventory_System.Migrations
                 name: "myModel",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BrandId = table.Column<int>(type: "int", nullable: false),
-                    ID = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -289,7 +250,7 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_myModel", x => x.Id);
+                    table.PrimaryKey("PK_myModel", x => x.ID);
                     table.ForeignKey(
                         name: "FK_myModel_Brand_BrandId",
                         column: x => x.BrandId,
@@ -299,17 +260,15 @@ namespace POS_Inventory_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "CompanyBranch",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ComId = table.Column<int>(type: "int", nullable: false),
-                    BranchId = table.Column<int>(type: "int", nullable: false),
-                    CustomerType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TIN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VatRegistryNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPersonDesignation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -317,54 +276,7 @@ namespace POS_Inventory_System.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IsArchive = table.Column<bool>(type: "bit", nullable: false),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Customer_CompanyBranch_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "CompanyBranch",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Customer_CompanyInfos_ComId",
-                        column: x => x.ComId,
-                        principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Supplier",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplierCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ComId = table.Column<int>(type: "int", nullable: false),
-                    BranchId = table.Column<int>(type: "int", nullable: false),
-                    SupplierBrand = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactPersonDesignation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IsArchive = table.Column<bool>(type: "bit", nullable: false),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SupplierType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -374,18 +286,12 @@ namespace POS_Inventory_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Supplier", x => x.ID);
+                    table.PrimaryKey("PK_CompanyBranch", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Supplier_CompanyBranch_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "CompanyBranch",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Supplier_CompanyInfos_ComId",
+                        name: "FK_CompanyBranch_CompanyInfos_ComId",
                         column: x => x.ComId,
                         principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -419,46 +325,6 @@ namespace POS_Inventory_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "voucherTypewithCom",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    VoucherTypeId = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false),
-                    BranchID = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_voucherTypewithCom", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_voucherTypewithCom_CompanyBranch_BranchID",
-                        column: x => x.BranchID,
-                        principalTable: "CompanyBranch",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_voucherTypewithCom_CompanyInfos_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_voucherTypewithCom_VoucherType_VoucherTypeId",
-                        column: x => x.VoucherTypeId,
-                        principalTable: "VoucherType",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Item",
                 columns: table => new
                 {
@@ -478,7 +344,6 @@ namespace POS_Inventory_System.Migrations
                     LastPurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IdealPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
-                    ModelId = table.Column<int>(type: "int", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: true),
                     ReorderLevel = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     MaxDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -486,6 +351,7 @@ namespace POS_Inventory_System.Migrations
                     VatAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DiscountRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ModelID = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -507,19 +373,227 @@ namespace POS_Inventory_System.Migrations
                         name: "FK_Item_Category_ItemCategoryId",
                         column: x => x.ItemCategoryId,
                         principalTable: "Category",
-                        principalColumn: "Id",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Item_myModel_ModelId",
-                        column: x => x.ModelId,
+                        name: "FK_Item_myModel_ModelID",
+                        column: x => x.ModelID,
                         principalTable: "myModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Item_unit_UnitId",
                         column: x => x.UnitId,
                         principalTable: "unit",
-                        principalColumn: "Id");
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ComId = table.Column<int>(type: "int", nullable: false),
+                    ComCompanyInfoID = table.Column<int>(type: "int", nullable: true),
+                    BranchId = table.Column<int>(type: "int", nullable: false),
+                    CustomerType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccountCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactPersonDesignation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsArchive = table.Column<bool>(type: "bit", nullable: false),
+                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Customer_CompanyBranch_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "CompanyBranch",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Customer_CompanyInfos_ComCompanyInfoID",
+                        column: x => x.ComCompanyInfoID,
+                        principalTable: "CompanyInfos",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Supplier",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SupplierCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ComId = table.Column<int>(type: "int", nullable: false),
+                    CompanyID = table.Column<int>(type: "int", nullable: true),
+                    BranchId = table.Column<int>(type: "int", nullable: false),
+                    SupplierBrand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPersonDesignation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsArchive = table.Column<bool>(type: "bit", nullable: false),
+                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SupplierType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supplier", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Supplier_CompanyBranch_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "CompanyBranch",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Supplier_CompanyInfos_CompanyID",
+                        column: x => x.CompanyID,
+                        principalTable: "CompanyInfos",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "voucherTypewithCom",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VoucherTypeId = table.Column<int>(type: "int", nullable: false),
+                    CmdId = table.Column<int>(type: "int", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_voucherTypewithCom", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_voucherTypewithCom_CompanyBranch_BranchID",
+                        column: x => x.BranchID,
+                        principalTable: "CompanyBranch",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_voucherTypewithCom_CompanyInfos_CmdId",
+                        column: x => x.CmdId,
+                        principalTable: "CompanyInfos",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate:ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_voucherTypewithCom_VoucherType_VoucherTypeId",
+                        column: x => x.VoucherTypeId,
+                        principalTable: "VoucherType",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Division",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShortName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Division", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Division_Country_CountryID",
+                        column: x => x.CountryID,
+                        principalTable: "Country",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StockMaster",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpeningQty = table.Column<double>(type: "float", nullable: false),
+                    QuantityInStock = table.Column<double>(type: "float", nullable: false),
+                    ReorderLevel = table.Column<double>(type: "float", nullable: false),
+                    PurchasePrice = table.Column<double>(type: "float", nullable: false),
+                    SellingPrice = table.Column<double>(type: "float", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockMaster", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_StockMaster_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StockMaster_CompanyBranch_BranchID",
+                        column: x => x.BranchID,
+                        principalTable: "CompanyBranch",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StockMaster_CompanyInfos_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "CompanyInfos",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate: ReferentialAction.NoAction    );
+                    table.ForeignKey(
+                        name: "FK_StockMaster_Item_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Item",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate:ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -568,14 +642,16 @@ namespace POS_Inventory_System.Migrations
                         name: "FK_SalesMaster_CompanyInfos_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_SalesMaster_Customer_CustomerID",
                         column: x => x.CustomerID,
                         principalTable: "Customer",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_SalesMaster_PaymentMethod_PaymentModeId",
                         column: x => x.PaymentModeId,
@@ -642,8 +718,9 @@ namespace POS_Inventory_System.Migrations
                         name: "FK_PurchaseMasters_CompanyInfos_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate:ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_PurchaseMasters_PaymentMethod_PaymodeID",
                         column: x => x.PaymodeID,
@@ -655,87 +732,12 @@ namespace POS_Inventory_System.Migrations
                         column: x => x.SupplierID,
                         principalTable: "Supplier",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_PurchaseMasters_VoucherType_VoucherTypeID",
                         column: x => x.VoucherTypeID,
                         principalTable: "VoucherType",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Division",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShortName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Division", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Division_Country_CountryID",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StockMaster",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OpeningQty = table.Column<double>(type: "float", nullable: false),
-                    QuantityInStock = table.Column<double>(type: "float", nullable: false),
-                    ReorderLevel = table.Column<double>(type: "float", nullable: false),
-                    PurchasePrice = table.Column<double>(type: "float", nullable: false),
-                    SellingPrice = table.Column<double>(type: "float", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false),
-                    BranchID = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedIP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StockMaster", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_StockMaster_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StockMaster_CompanyBranch_BranchID",
-                        column: x => x.BranchID,
-                        principalTable: "CompanyBranch",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StockMaster_CompanyInfos_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "CompanyInfos",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StockMaster_Item_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Item",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -827,9 +829,9 @@ namespace POS_Inventory_System.Migrations
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_ComId",
+                name: "IX_Customer_ComCompanyInfoID",
                 table: "Customer",
-                column: "ComId");
+                column: "ComCompanyInfoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_District_DivisionID",
@@ -852,9 +854,9 @@ namespace POS_Inventory_System.Migrations
                 column: "ItemCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_ModelId",
+                name: "IX_Item_ModelID",
                 table: "Item",
-                column: "ModelId");
+                column: "ModelID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Item_UnitId",
@@ -942,9 +944,9 @@ namespace POS_Inventory_System.Migrations
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Supplier_ComId",
+                name: "IX_Supplier_CompanyID",
                 table: "Supplier",
-                column: "ComId");
+                column: "CompanyID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SupplierAddress_ThanaID",
@@ -962,9 +964,9 @@ namespace POS_Inventory_System.Migrations
                 column: "BranchID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_voucherTypewithCom_CompanyId",
+                name: "IX_voucherTypewithCom_CmdId",
                 table: "voucherTypewithCom",
-                column: "CompanyId");
+                column: "CmdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_voucherTypewithCom_VoucherTypeId",
@@ -1033,6 +1035,9 @@ namespace POS_Inventory_System.Migrations
                 name: "District");
 
             migrationBuilder.DropTable(
+                name: "CompanyInfos");
+
+            migrationBuilder.DropTable(
                 name: "Brand");
 
             migrationBuilder.DropTable(
@@ -1043,32 +1048,6 @@ namespace POS_Inventory_System.Migrations
 
             migrationBuilder.DropTable(
                 name: "Currency");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_CompanyInfos",
-                table: "CompanyInfos");
-
-            migrationBuilder.DropColumn(
-                name: "CompanyID",
-                table: "CompanyInfos");
-
-            migrationBuilder.RenameTable(
-                name: "CompanyInfos",
-                newName: "CompanyInfo");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "ID",
-                table: "CompanyInfo",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
-                .Annotation("SqlServer:Identity", "1, 1");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_CompanyInfo",
-                table: "CompanyInfo",
-                column: "ID");
         }
     }
 }

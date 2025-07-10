@@ -10,8 +10,8 @@ namespace POS_Inventory_System.Models
 {
     public class CompanyInfo : BaseCLass
     {
-        [Key]
-        public int CompanyID { get; set; }
+        //[Key]
+        //public int CompanyID { get; set; }
         [Required]
         public string Code { get; set; } = string.Empty;
 

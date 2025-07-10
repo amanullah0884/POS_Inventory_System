@@ -69,11 +69,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -88,9 +88,6 @@ namespace POS_Inventory_System.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -116,18 +113,18 @@ namespace POS_Inventory_System.Migrations
                     b.Property<string>("ShortCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Category");
                 });
 
             modelBuilder.Entity("POS_Inventory_System.Models.Color", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -142,9 +139,6 @@ namespace POS_Inventory_System.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -164,7 +158,7 @@ namespace POS_Inventory_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Color");
                 });
@@ -252,11 +246,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.CompanyInfo", b =>
                 {
-                    b.Property<int>("CompanyID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -291,9 +285,6 @@ namespace POS_Inventory_System.Migrations
                     b.Property<string>("FiscalYearStartDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -334,7 +325,7 @@ namespace POS_Inventory_System.Migrations
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CompanyID");
+                    b.HasKey("ID");
 
                     b.ToTable("CompanyInfos");
                 });
@@ -432,9 +423,8 @@ namespace POS_Inventory_System.Migrations
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ComCompanyInfoID")
+                        .HasColumnType("int");
 
                     b.Property<int>("ComId")
                         .HasColumnType("int");
@@ -504,7 +494,7 @@ namespace POS_Inventory_System.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.HasIndex("ComId");
+                    b.HasIndex("ComCompanyInfoID");
 
                     b.ToTable("Customer");
                 });
@@ -577,11 +567,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.Item", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<decimal>("AveragePurchasePrice")
                         .HasColumnType("decimal(18,2)");
@@ -614,9 +604,6 @@ namespace POS_Inventory_System.Migrations
                     b.Property<decimal>("DiscountRate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("IdealPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -632,7 +619,7 @@ namespace POS_Inventory_System.Migrations
                     b.Property<decimal>("MaxDiscount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ModelId")
+                    b.Property<int?>("ModelID")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
@@ -682,13 +669,13 @@ namespace POS_Inventory_System.Migrations
                     b.Property<decimal>("WholeSalePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.HasIndex("BrandId");
 
                     b.HasIndex("ItemCategoryId");
 
-                    b.HasIndex("ModelId");
+                    b.HasIndex("ModelID");
 
                     b.HasIndex("UnitId");
 
@@ -697,11 +684,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.Model", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
@@ -719,9 +706,6 @@ namespace POS_Inventory_System.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -741,7 +725,7 @@ namespace POS_Inventory_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.HasIndex("BrandId");
 
@@ -1072,11 +1056,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.Size", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -1091,9 +1075,6 @@ namespace POS_Inventory_System.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -1113,7 +1094,7 @@ namespace POS_Inventory_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Size");
                 });
@@ -1211,6 +1192,9 @@ namespace POS_Inventory_System.Migrations
                     b.Property<int>("ComId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CompanyID")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContactPerson")
                         .HasColumnType("nvarchar(max)");
 
@@ -1278,7 +1262,7 @@ namespace POS_Inventory_System.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.HasIndex("ComId");
+                    b.HasIndex("CompanyID");
 
                     b.ToTable("Supplier");
                 });
@@ -1357,11 +1341,11 @@ namespace POS_Inventory_System.Migrations
 
             modelBuilder.Entity("POS_Inventory_System.Models.Unit", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("ActualName")
                         .IsRequired()
@@ -1384,9 +1368,6 @@ namespace POS_Inventory_System.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -1404,7 +1385,7 @@ namespace POS_Inventory_System.Migrations
                     b.Property<string>("ShortName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("unit");
                 });
@@ -1469,7 +1450,7 @@ namespace POS_Inventory_System.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("CmdId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
@@ -1504,7 +1485,7 @@ namespace POS_Inventory_System.Migrations
 
                     b.HasIndex("BranchID");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("CmdId");
 
                     b.HasIndex("VoucherTypeId");
 
@@ -1541,15 +1522,13 @@ namespace POS_Inventory_System.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("POS_Inventory_System.Models.CompanyInfo", "Company")
+                    b.HasOne("POS_Inventory_System.Models.CompanyInfo", "ComCompanyInfo")
                         .WithMany()
-                        .HasForeignKey("ComId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ComCompanyInfoID");
 
                     b.Navigation("Branch");
 
-                    b.Navigation("Company");
+                    b.Navigation("ComCompanyInfo");
                 });
 
             modelBuilder.Entity("POS_Inventory_System.Models.District", b =>
@@ -1590,9 +1569,7 @@ namespace POS_Inventory_System.Migrations
 
                     b.HasOne("POS_Inventory_System.Models.Model", "Model")
                         .WithMany()
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ModelID");
 
                     b.HasOne("POS_Inventory_System.Models.Unit", "Unit")
                         .WithMany()
@@ -1749,9 +1726,7 @@ namespace POS_Inventory_System.Migrations
 
                     b.HasOne("POS_Inventory_System.Models.CompanyInfo", "Company")
                         .WithMany()
-                        .HasForeignKey("ComId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyID");
 
                     b.Navigation("Branch");
 
@@ -1790,7 +1765,7 @@ namespace POS_Inventory_System.Migrations
 
                     b.HasOne("POS_Inventory_System.Models.CompanyInfo", "CompanyInfo")
                         .WithMany()
-                        .HasForeignKey("CompanyId")
+                        .HasForeignKey("CmdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

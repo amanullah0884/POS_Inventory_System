@@ -43,7 +43,7 @@ namespace POS_System.Controllers
             await _unitOfWork.ProductPackageRepo.Add(productPackage);
             await _unitOfWork.Save();
 
-            return CreatedAtAction(nameof(Get), new { id = productPackage.Id }, productPackage);
+            return CreatedAtAction(nameof(Get), new { id = productPackage.ID }, productPackage);
         }
 
         [HttpPut("{id}")]

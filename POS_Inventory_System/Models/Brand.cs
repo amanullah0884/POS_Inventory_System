@@ -11,8 +11,8 @@ namespace POS_Inventory_System.Models
 
     public class Brand : BaseCLass
     {
-        [Key]
-        public int Id { get; set; }
+    //    [Key]
+    //    public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
 
