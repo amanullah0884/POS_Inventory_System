@@ -27,5 +27,6 @@ namespace POS_Inventory_System.Repositories.Base
 
         string save();
         Task Save();
+
     }
 }

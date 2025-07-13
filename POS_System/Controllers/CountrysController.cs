@@ -14,11 +14,13 @@ namespace POS_System.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [HttpGet]
         public async Task<List<Country>>Get()
         {
             var data = await _unitOfWork.CountryRepo.GetAll(null, null);
             return data.ToList();
         }
+        [HttpPost]
         public async Task<IActionResult>Post (Country country)
         {
             country.CreatedBy = User.Identity?.Name ?? "Not authenticated";
