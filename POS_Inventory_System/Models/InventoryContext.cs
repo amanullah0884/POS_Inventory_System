@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace POS_Inventory_System.Models
 {
-    public class InventoryContext : DbContext
+    public class ApplicationUser : IdentityUser
+    {
+
+    }
+    public class InventoryContext : IdentityDbContext<ApplicationUser>
     {
         public InventoryContext()
         {
@@ -38,7 +44,7 @@ namespace POS_Inventory_System.Models
         public DbSet<VoucherTypewithCom> voucherTypewithCom{ get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-QTAM551\\SQLEXPRESS;Initial Catalog=dbInventory; TrustServerCertificate=true;Trusted_connection=true; ");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-58HK0SV;Initial Catalog=dbInventoryPos; TrustServerCertificate=true;Trusted_connection=true; ");
         }
     }
 }
