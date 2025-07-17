@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using POS_Inventory_System.Models;
 using POS_Inventory_System.Repositories.Base;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace POS_System.Controllers
 
         
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<Brand>>> Get()
         {
             var data = await _unitOfWork.BrandRepo.GetAll(null, null);
@@ -26,6 +28,7 @@ namespace POS_System.Controllers
 
         
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post(Brand entity)
         {
             entity.CreatedBy = User.Identity?.Name ?? "Anonymous";
@@ -39,6 +42,7 @@ namespace POS_System.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Put(int id, Brand entity)
         {
             var existing = await _unitOfWork.BrandRepo.GetById(id);
@@ -59,6 +63,7 @@ namespace POS_System.Controllers
 
    
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var entity = await _unitOfWork.BrandRepo.GetById(id);
