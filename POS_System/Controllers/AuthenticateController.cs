@@ -1,17 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using POS_Inventory_System.Models; // ApplicationUser
+using POS_Inventory_System.Models;
 using POS_System.DTOs;
-using POS_System.Security; // TokenManager
-using System.IdentityModel.Tokens.Jwt;
+using POS_System.Security;
 using System.Security.Claims;
-using System.Text;
 
 namespace POS_System.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthenticateController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -23,12 +20,15 @@ namespace POS_System.Controllers
             _tokenManager = tokenManager;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
-                return BadRequest("User already exists!");
+                return BadRequest(new { message = "User already exists!" });
 
             var user = new ApplicationUser
             {
@@ -39,70 +39,147 @@ namespace POS_System.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
-            if (!result.Succeeded)
-            {
-                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                return StatusCode(500, new { message = errors });
-            }
+            if (result.Succeeded)
+                return Created("", new { message = "User created successfully!" });
 
-            return Created("", "User created successfully");
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            return StatusCode(500, new { message = errors });
         }
 
-
-
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginModel entity)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            if (entity == null || string.IsNullOrEmpty(entity.UserName) || string.IsNullOrEmpty(entity.Hash))
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            if (user == null)
+                return Unauthorized(new { message = "Invalid username or password" });
+
+            var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
+            if (!passwordValid)
+                return Unauthorized(new { message = "Invalid username or password" });
+
+            var claims = new List<Claim>
             {
-                return BadRequest(new { message = "Please provide username and password hash" });
-            }
-            try
-            {
-                // Decode password from Base64Url encoded hash
-                var decodedPassword = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(entity.Hash));
+                new Claim(ClaimTypes.Name, user.UserName),
+              
+            };
 
-                var existUser = await _userManager.FindByNameAsync(entity.UserName);
-                if (existUser == null)
-                {
-                    return Unauthorized(new { msg = "Invalid user name" });
-                }
 
-                var isValidPassword = await _userManager.CheckPasswordAsync(existUser, decodedPassword);
-                if (!isValidPassword)
-                {
-                    return Unauthorized(new { msg = "Invalid password" });
-                }
+            var token = _tokenManager.GenerateAccessToken(claims);
 
-                var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, entity.UserName ?? ""),
-            new Claim(ClaimTypes.NameIdentifier, existUser.Id)
-        };
-
-                string accessToken = _tokenManager.GenerateAccessToken(claims);
-                if (!string.IsNullOrEmpty(accessToken))
-                {
-                    return Ok(new { accessToken });
-                }
-            }
-            catch (Exception ex)
-            {
-                return Unauthorized(new { msg = ex.Message });
-            }
-
-            return Unauthorized(new { msg = "Unable to authenticate" });
+            return Ok(new { accessToken = token });
         }
     }
 }
 
 
-    //    public async Task<IActionResult> Login(LoginModel entity)
-    //    {
-    //        if (entity == null || string.IsNullOrEmpty(entity.UserName) || string.IsNullOrEmpty(entity.Hash))
-    //        {
-    //            return BadRequest(new { message = "Please provide username and password hash" });
-    //        }
+//using Microsoft.AspNetCore.Identity;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.WebUtilities;
+//using POS_Inventory_System.Models; // ApplicationUser
+//using POS_System.DTOs;
+//using POS_System.Security; // TokenManager
+//using System.IdentityModel.Tokens.Jwt;
+//using System.Security.Claims;
+//using System.Text;
+
+//namespace POS_System.Controllers
+//{
+//    [Route("api/[controller]")]
+//    [ApiController]
+//    public class AuthenticateController : ControllerBase
+//    {
+//        private readonly UserManager<ApplicationUser> _userManager;
+//        private readonly ITokenManager _tokenManager;
+
+//        public AuthenticateController(UserManager<ApplicationUser> userManager, ITokenManager tokenManager)
+//        {
+//            _userManager = userManager;
+//            _tokenManager = tokenManager;
+//        }
+
+//        [HttpPost("register")]
+//        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+//        {
+//            var userExists = await _userManager.FindByNameAsync(model.UserName);
+//            if (userExists != null)
+//                return BadRequest("User already exists!");
+
+//            var user = new ApplicationUser
+//            {
+//                UserName = model.UserName,
+//                Email = model.Email,
+//                PhoneNumber = model.PhoneNumber
+//            };
+
+//            var result = await _userManager.CreateAsync(user, model.Password);
+
+//            if (!result.Succeeded)
+//            {
+//                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+//                return StatusCode(500, new { message = errors });
+//            }
+
+//            return Created("", "User created successfully");
+//        }
+
+
+
+//        [HttpPost("Login")]
+//        public async Task<IActionResult> Login(LoginModel entity)
+//        {
+//            if (entity == null || string.IsNullOrEmpty(entity.UserName) || string.IsNullOrEmpty(entity.Hash))
+//            {
+//                return BadRequest(new { message = "Please provide username and password hash" });
+//            }
+//            try
+//            {
+//                // Decode password from Base64Url encoded hash
+//                var decodedPassword = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(entity.Hash));
+
+//                var existUser = await _userManager.FindByNameAsync(entity.UserName);
+//                if (existUser == null)
+//                {
+//                    return Unauthorized(new { msg = "Invalid user name" });
+//                }
+
+//                var isValidPassword = await _userManager.CheckPasswordAsync(existUser, decodedPassword);
+//                if (!isValidPassword)
+//                {
+//                    return Unauthorized(new { msg = "Invalid password" });
+//                }
+
+//                var claims = new List<Claim>
+//        {
+//            new Claim(ClaimTypes.Name, entity.UserName ?? ""),
+//            new Claim(ClaimTypes.NameIdentifier, existUser.Id)
+//        };
+
+//                string accessToken = _tokenManager.GenerateAccessToken(claims);
+//                if (!string.IsNullOrEmpty(accessToken))
+//                {
+//                    return Ok(new { accessToken });
+//                }
+//            }
+//            catch (Exception ex)
+//            {
+//                return Unauthorized(new { msg = ex.Message });
+//            }
+
+//            return Unauthorized(new { msg = "Unable to authenticate" });
+//        }
+//    }
+//}
+
+
+//    public async Task<IActionResult> Login(LoginModel entity)
+//    {
+//        if (entity == null || string.IsNullOrEmpty(entity.UserName) || string.IsNullOrEmpty(entity.Hash))
+//        {
+//            return BadRequest(new { message = "Please provide username and password hash" });
+//        }
 
 //        try
 //        {
