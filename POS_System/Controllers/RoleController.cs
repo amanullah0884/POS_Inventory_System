@@ -41,7 +41,7 @@ namespace POS_System.Controllers
                 return BadRequest($"Failed to create role '{roleName}': {string.Join(", ", result.Errors.Select(e => e.Description))}");
         }
 
-        // 2) Assign a Role to a User
+        // Assign a Role to a User
         [HttpPost("AssignRole")]
         public async Task<IActionResult> AssignRole([FromBody] AssignRoleModel model)
         {
