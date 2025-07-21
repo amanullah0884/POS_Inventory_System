@@ -21,7 +21,7 @@ namespace POS_System.Controllers
             _userManager = userManager;
         }
 
-        // 1) Create a new Role
+        // Create a new Role
         [HttpPost("CreateRole")]
         public async Task<IActionResult> CreateRole([FromBody] string roleName)
         {

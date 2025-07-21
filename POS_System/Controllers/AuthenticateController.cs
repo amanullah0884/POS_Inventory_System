@@ -60,19 +60,37 @@ namespace POS_System.Controllers
             if (!passwordValid)
                 return Unauthorized(new { message = "Invalid username or password" });
 
+            //  Basic Claims
             var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim(ClaimTypes.NameIdentifier, user.Id)
+    };
+
+            if (!string.IsNullOrEmpty(user.Email))
             {
-                new Claim(ClaimTypes.Name, user.UserName),
-              
-            };
+                claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            }
 
+            //  Add Role Claims
+            var roles = await _userManager.GetRolesAsync(user);
 
+            foreach (var role in roles)
+            {
+                if (!string.IsNullOrEmpty(role))
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
+            }
+
+            //  Generate Token
             var token = _tokenManager.GenerateAccessToken(claims);
 
             return Ok(new { accessToken = token });
         }
     }
-}
+
+    }
 
 
 //using Microsoft.AspNetCore.Identity;
