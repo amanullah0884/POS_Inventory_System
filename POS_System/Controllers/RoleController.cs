@@ -9,7 +9,7 @@ namespace POS_System.Controllers
 {
     [Route("api/[controller]")]                 // API endpoint: /api/Role
     [ApiController]
-    [Authorize(Roles = "Admin")]                // Only users with Admin role can access this controller
+    /*[Authorize(Roles = "Admin")] */               // Only users with Admin role can access this controller
     public class RoleController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -23,7 +23,7 @@ namespace POS_System.Controllers
 
         // Create a new Role
         [HttpPost("CreateRole")]
-        public async Task<IActionResult> CreateRole([FromBody] string roleName)
+        public async Task<IActionResult> CreateRole( string roleName)
         {
             if (string.IsNullOrEmpty(roleName))
                 return BadRequest("Role name cannot be empty.");
@@ -43,7 +43,7 @@ namespace POS_System.Controllers
 
         // Assign a Role to a User
         [HttpPost("AssignRole")]
-        public async Task<IActionResult> AssignRole([FromBody] AssignRoleModel model)
+        public async Task<IActionResult> AssignRole(AssignRoleModel model)
         {
             // Find the user by username
             var user = await _userManager.FindByNameAsync(model.UserName);

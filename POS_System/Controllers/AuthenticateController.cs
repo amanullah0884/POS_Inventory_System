@@ -70,6 +70,7 @@ namespace POS_System.Controllers
             if (!string.IsNullOrEmpty(user.Email))
             {
                 claims.Add(new Claim(ClaimTypes.Email, user.Email));
+
             }
 
             //  Add Role Claims
